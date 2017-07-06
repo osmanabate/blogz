@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 style= "text-align:center;"> Build a Blog</h1>
+    <form style="
+                background-color: #eee;
+                padding: 20px;
+                margin: 0 auto;
+                width: 540px;
+                font: 16px sans-serif;
+                border-radius: 10px;" method='post'>
+        <label>
+            blog title:
+            <input type="text" name='title' />
+        </label><br>
+        <br>
+        <br>
+        <label>Your new blog
+            <textarea name='content' style='margin: 10px 0;
+                width: 540px;
+                height: 120px;'></textarea>
+        </label>
+        <input type="submit" />
+    </form>
+
+
+{% endblock %}
