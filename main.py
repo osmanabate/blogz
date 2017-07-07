@@ -1,4 +1,8 @@
-# worked with Abdulkarim Abate
+#__author__: "osman abate"
+#__version__: "1.0"
+# date: 07/05/2017
+# assignment: Build-a-blog
+# collaborated with "Abdulkarim Abate"
 from flask import Flask, request, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 
