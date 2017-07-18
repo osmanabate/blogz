@@ -22,7 +22,7 @@ class Blog(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
-    def __init__(self, title, content):
+    def __init__(self, title, content, owner):
         self.title = title
         self.content = content
         self.owner = owner
@@ -137,7 +137,7 @@ def add():
     blog_id = request.args.get('id')
     blog_user = request.args.get('email')
 
-    if blog_id==None:
+    if blog_id:
         posts = Blog.query.filter_by(id=blog_user).first()
         return render_template('Blog_page.html', page_name="Build a Blog", posts= posts)
 
