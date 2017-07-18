@@ -97,17 +97,6 @@ def signup():
 
     return render_template('signup.html')
 
-@app.route('/delete-task', methods=['POST'])
-def delete_task():
-
-    task_id = int(request.form['task-id'])
-    task = Task.query.get(task_id)
-    task.completed = True
-    db.session.add(task)
-    db.session.commit()
-
-    return redirect('/')
-
 @app.route('/logout')
 def logout():
     del session['email']
@@ -115,6 +104,8 @@ def logout():
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
+
+    owner = User.query.filter_by(email=session['email']).first()
 
     if request.method == 'POST':
         error_title = ""
@@ -130,10 +121,10 @@ def index():
         if len(error_title)>0 or len(error_content)>0:
             return render_template('index.html', title= blog_title, content= blog_content, error_title=error_title, error_content=error_content)
         else:
-            new_task = Blog(blog_title, blog_content)
-            db.session.add(new_task)
+            new_blog = Blog(blog_title, blog_content)
+            db.session.add(new_blog)
             db.session.commit()
-            return redirect("/blog_page?id=" +str(new_task.id))
+            return redirect("/blog_page?id=" +str(new_blog.id))
 
     else:
         posts = Blog.query.all()
