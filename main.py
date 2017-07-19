@@ -121,16 +121,13 @@ def index():
         if len(error_title)>0 or len(error_content)>0:
             return render_template('index.html', title= blog_title, content= blog_content, error_title=error_title, error_content=error_content)
         else:
-            new_blog = Blog(blog_title, blog_content)
+            new_blog = Blog(blog_title, blog_content, owner)
             db.session.add(new_blog)
             db.session.commit()
             return redirect("/blog_page?id=" +str(new_blog.id))
 
-    else:
-        posts = Blog.query.all()
-
     posts = Blog.query.filter_by(owner=owner).all()
-    return render_template('index.html', page_name= 'Add a blog Entry', posts= posts)
+    return render_template('index.html', posts= posts)
 
 @app.route('/blog_page', methods=['GET'])
 def add():
@@ -138,13 +135,14 @@ def add():
     blog_user = request.args.get('email')
 
     if blog_id:
-        posts = Blog.query.filter_by(id=blog_user).first()
-        return render_template('Blog_page.html', page_name="Build a Blog", posts= posts)
+        post = Blog.query.filter_by(id=blog_user).first()
+        return render_template('single_blog_page.html', page_name="Build a Blog", post= post)
 
     elif blog_user:
         user_id = User.query.filter_by(email=blog_user).first().id
         posts = Blog.query.filter_by(owner_id=user_id).all()
-        return render_template('mainpage.html', posts=posts)
+        return render_template('blog_page.html', posts=posts)
+
 
     else:
         users= User.query.all()

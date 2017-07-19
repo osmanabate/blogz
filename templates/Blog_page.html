@@ -3,9 +3,9 @@
 {%  block content %}
     {%  for post in posts %}
 
-        <a href="blog_page?id={{post.id}}">{{ post.title }}</a><br>
-    <p>{{ post.content }}</p>
-  
+        <a href="/blog_page?id={{post.id}}">{{post.title}}</a><br>
+    <p>{{post.content}}</p>
+
 
 
     {%  endfor %}
