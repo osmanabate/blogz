@@ -130,6 +130,7 @@ def index():
     posts = Blog.query.filter_by(owner=owner).all()
     return render_template('index.html', posts= posts)
 
+
 @app.route('/blog_page', methods=['GET'])
 def add():
     blog_id = request.args.get('id')
@@ -149,6 +150,14 @@ def add():
         users= User.query.all()
         return render_template('user_name_list.html', page_name = "blog users!", users=users)
 
-
+@app.route('/all_posts', methods=['GET'])
+def allposts():
+    blog_id = request.args.get('id')
+    if blog_id==None:
+        posts = Blog.query.all()
+        return render_template('all_posts.html', posts= posts)
+    else:
+        single_post = Blog.query.filter_by(id=blog_id).first()
+        return render_template('single_blog_page.html', posts=single_post)
 if __name__ == '__main__':
     app.run()
