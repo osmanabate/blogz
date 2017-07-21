@@ -136,8 +136,8 @@ def add():
     blog_user = request.args.get('email')
 
     if blog_id:
-        post = Blog.query.filter_by(id=blog_user).first()
-        return render_template('single_blog_page.html', page_name="Build a Blog", post= post)
+        posts = Blog.query.filter_by(id=blog_id).first()
+        return render_template('single_blog_page.html', page_name="Build a Blog", posts= posts)
 
     elif blog_user:
         user_id = User.query.filter_by(email=blog_user).first().id
