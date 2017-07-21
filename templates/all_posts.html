@@ -3,10 +3,10 @@
 {%  block content %}
     {%  for post in posts %}
 
-        <a href="all_posts?id={{post.id}}">{{ post.title }}</a>
+        <a href="all_posts?id={{post.id}}"><h3><strong>{{ post.title }}</strong></h3></a>
     <p>{{ post.content }}</p>
 
-    <p>Writtien by: <a href="/all_posts?id={{ post.id }}">{{ post.owner.email}}</a></p>
+    <p>Writtien by: <a href="/all_posts?id={{ post.id }}"><em>{{ post.owner.email}}</em></a></p>
 
 
 
