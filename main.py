@@ -52,7 +52,7 @@ def login():
             return redirect('/')
         else:
 
-            return '<h1>Invalid input, please try again!</h1>'
+            return redirect ('/login')
 
     return render_template('login.html')
 
